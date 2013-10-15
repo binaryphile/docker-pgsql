@@ -1,0 +1,16 @@
+.cache/
+.oh-my-zsh/
+.vim/
+.gitconfig
+postgresql*/
+postgresql*.tar.gz
+.tmux.conf
+.viminfo
+.vimrc
+.zshrc
+.zcompdump*
+.zsh-update
+.zsh_history
+dockyard
+env.sh
+
