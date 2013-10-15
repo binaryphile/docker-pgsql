@@ -23,9 +23,8 @@ the database files and run the container with the appropriate arguments.
 
 The container loads configuration and database files by mounting the
 current directory as a writable volume.  Configuration files are in this
-directory and database files are in the `postgresql` subdirectory (made
-when you make the database).  Logging is done to a file in this
-directory as well.
+directory and logging is done here as well.  The database files
+themselves are in the `postgresql` subdirectory.
 
 # Usage
 
