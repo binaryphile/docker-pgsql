@@ -8,5 +8,5 @@ PGCMD="$PGBIN/postgres -c config_file=$PGCONF"
 PGPORT=5432
 SUDO="" # change to "sudo" if you aren't in docker group
 
-$SUDO docker run -d -u $USER -p $PGPORT:5432 -v $(pwd):$ROOT -e PGDATA=$PGDATA $IMAGE $PGCMD
+$SUDO docker run -d -u $USER -v $(pwd):$ROOT -e PGDATA=$PGDATA $IMAGE $PGCMD
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ROOT=/root
 PGDATA=$ROOT/postgresql
@@ -10,5 +10,5 @@ USERNAME=docker
 PASSWORD=d0cker
 
 $PGINIT $PGDATA
-$PGCMD --single -c config_file=$PGCONF <<< "CREATE USER $USERNAME WITH SUPERUSER PASSWORD '$PASSWORD'";
+$PGCMD --single -c config_file=$PGCONF <<< "CREATE USER $USERNAME WITH SUPERUSER PASSWORD '$PASSWORD';"
 

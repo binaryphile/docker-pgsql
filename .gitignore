@@ -4,6 +4,7 @@
 .gitconfig
 postgresql*/
 postgresql*.tar.gz
+postgresql-*.log
 .tmux.conf
 .viminfo
 .vimrc
