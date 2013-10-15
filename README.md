@@ -20,11 +20,12 @@ reusability.  To that end, this image contains only the executables and
 their dependencies, and none of the configuration or database files.  It
 can be used to run database instances unmodified, provided you set up
 the database files and run the container with the appropriate arguments.
-The container is meant to load configuration and database files by
-mounting the current directory as a writable volume.  Configuration
-files are in this directory and database files are in the `postgresql`
-subdirectory (made when you make the database).  Logging is done to
-a file in this directory as well.
+
+The container loads configuration and database files by mounting the
+current directory as a writable volume.  Configuration files are in this
+directory and database files are in the `postgresql` subdirectory (made
+when you make the database).  Logging is done to a file in this
+directory as well.
 
 # Usage
 
