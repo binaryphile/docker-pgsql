@@ -7,7 +7,8 @@ by running:
 
     docker pull binaryphile/pgsql:9.3.1
 
-See the script `run.sh` for usage.
+See the instructions on initializing the database and running the server
+below.
 
 # Intro
 
@@ -120,3 +121,5 @@ The port is mapped to your host at 5432 by default, so be aware it will
 be available on your network.  You can edit that out of the file easily
 if you want.
 
+[Docker]: http://docker.io/
+[Postgresql]: http://www.postgresql.org/
