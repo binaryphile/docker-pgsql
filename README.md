@@ -43,9 +43,9 @@ by default
 
 ### Prepping the source
 
-Edit `prep.sh` to specify the PostgreSQL version you want.  The source
-for your version must be available on the PostgreSQL ftp server.  You
-can find the url in the file.
+Edit `prep.sh` and `install.sh` to specify the PostgreSQL version you
+want.  The source for your version must be available on the PostgreSQL
+ftp server.  You can find the url in `prep.sh`.
 
 Run `./prep.sh`, which will download the sources and untar them.
 
@@ -62,12 +62,11 @@ installed in the container using these scripts, the local `sources.list`
 file will override the one in the container.  It will not be copied into
 the container, however.
 
-Run the command:
+Run the command (substituting "quantal" if desired):
 
     docker run -v $(pwd):/root -i -t ubuntu:precise /bin/bash
 
-Substitute quantal if desired.  Once at the command line, run
-`install.sh`:
+Once at the command line, run `install.sh`:
 
     $ cd root
     $ ./install.sh
@@ -88,10 +87,10 @@ push doesn't take a tag argument:
 
 ### Initializing the database
 
-Edit `init.sh` USERNAME and PASSWORD variables to create the user you
-want made for your database.
+Edit the `init.sh` USERNAME and PASSWORD variables to create the user
+you want made for your database.
 
-Run a container:
+Run a container from the image:
 
     docker run -u postgres -v $(pwd):/root -i -t [yourname]/[repo][:[tag]] /bin/bash
 
@@ -121,8 +120,8 @@ run the command, or else the mounting won't work properly.
 
 `Run.sh` will run a new container based on the image using the local
 files.  The database configuration files are in the current directory,
-so you can change them at any time (you'll just have to kill the old
-instance and start a new one):
+so you can change them at any time (you'll just have to `docker stop`
+the old instance and start a new one):
 
 - `pg_hba.conf`
 - `pg_ident.conf`
