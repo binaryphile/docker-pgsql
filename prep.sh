@@ -1,10 +1,10 @@
 #!/bin/sh
 
-export POSTGRESQL_VERSION=9.3.1
-export POSTGRESQL_NAME=postgresql
-export POSTGRESQL_ARCHIVE=$POSTGRESQL_NAME-POSTGRESQL_VERSION.tar.gz
-export POSTGRESQL_URL=http://ftp.postgresql.org/pub/source/v$POSTGRESQL_VERSION/$POSTGRESQL_ARCHIVE
+export PGVERSION=9.3.1
+export PGNAME=postgresql
+export PGARCHIVE=$PGNAME-PGVERSION.tar.gz
+export PGURL=http://ftp.postgresql.org/pub/source/v$PGVERSION/$PGARCHIVE
 
-curl -o $POSTGRESQL_ARCHIVE $POSTGRESQL_URL
-tar xvf $POSTGRESQL_ARCHIVE
+curl -o $PGARCHIVE $PGURL
+tar xvf $PGARCHIVE
 

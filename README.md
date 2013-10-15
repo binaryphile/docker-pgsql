@@ -3,7 +3,7 @@
 ## Before you build
 
 You can already use the PostgreSQL image I've created with these scripts
-by running:
+by cloning this repo and running:
 
     docker pull binaryphile/pgsql:9.3.1
 
@@ -22,10 +22,12 @@ it:
 
 - `prep.sh` - downloads and unzips the sources for PostgreSQL
 - `install.sh` - for use inside the image, installs PostgreSQL
-- `init.sh` - for use inside a container based on the image, initializes
-a database
+- `init.sh` - for use inside a container run from your image,
+initializes a database
 - `run.sh` - runs an instance of PostgreSQL and exposes it on port 5432
 by default
+
+# What "General-purpose" Means
 
 The idea behind a general-purpose Docker container is to maximize its
 reusability.  To that end, this image contains only the executables and
@@ -36,7 +38,7 @@ The container is meant to load configuration and database files by
 mounting the current directory as a writable volume.  Configuration
 files are in this directory and database files are in the `postgresql`
 subdirectory (made when you make the database).  Logging is done to
-a file in the database directory as well.
+a file in this directory as well.
 
 ## Creating the image
 
@@ -87,21 +89,17 @@ push doesn't take a tag argument:
 
 ### Initializing the database
 
+Edit `init.sh` USERNAME and PASSWORD variables to create the user you
+want made for your database.
+
 Run a container:
 
-    docker run -v $(pwd):/root -i -t [yourname]/[repo][:[tag]] /bin/bash
+    docker run -u postgres -v $(pwd):/root -i -t [yourname]/[repo][:[tag]] /bin/bash
 
 Inside the container run:
 
     $ cd root
     $ ./init.sh
-
-### Adding a user
-
-You can add a user while you're in the container using the command
-that's commented out in the `init.sh` script at the end.  I haven't
-gotten it to work correctly in a script, so you'll have to run it
-manually.  Substitute in the desired username and password.
 
 Exit when you're done and delete the container:
 
@@ -109,7 +107,7 @@ Exit when you're done and delete the container:
     docker rm [id]
 
 Remember, the container is generic, all of the data is on your local
-filesystem.  You don't need a container when you're done and they just
+filesystem.  You don't need old containers when they're done and they just
 clutter up your disk.  You'll always make a new container from the image
 whenever you run the server.
 
@@ -132,8 +130,8 @@ instance and start a new one):
 - `postgresql.conf`
 
 The port is mapped to your host at 5432 by default, so be aware it will
-be available on your network.  You can edit that out of the file easily
-if you want.
+be available on your network.  You can edit that in the file if you
+want.
 
 To stop the server:
 
@@ -141,5 +139,6 @@ To stop the server:
 
 You can dispose of the container each time you stop it with `docker rm
 [id]`.
+
 [Docker]: http://docker.io/
 [PostgreSQL]: http://www.postgresql.org/
