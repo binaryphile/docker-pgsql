@@ -50,9 +50,16 @@ Run `./prep.sh`, which will download the sources and untar them.
 
 ### Installing PostgreSQL
 
-Decide which version of ubuntu you want to install from.  Precise is
+Decide which version of Ubuntu you want to install from.  Precise is
 recommended.  If you use quantal, edit `sources.list` to change the
 distribution name.
+
+Also, take a second to change `sources.list` to use your favorite local
+Ubuntu mirror rather than ubuntu.wikimedia.org.  Leave the second line
+for archive.ubuntu.com intact, it's necessary.  When software is
+installed in the container using these scripts, the local `sources.list`
+file will override the one in the container.  It will not be copied into
+the container, however.
 
 Run the command:
 
@@ -89,10 +96,12 @@ Inside the container run:
     $ cd root
     $ ./init.sh
 
-Currently, the script creates the database files but you'll have to run
-the second command manually in order to create a user.  Technically you
-can do this later from a pgsql client, but you'll have to figure out the
-command from the script if you want to create a user now.
+### Adding a user
+
+You can add a user while you're in the container using the command
+that's commented out in the `init.sh` script at the end.  I haven't
+gotten it to work correctly in a script, so you'll have to run it
+manually.  Substitute in the desired username and password.
 
 Exit when you're done and delete the container:
 
@@ -100,7 +109,9 @@ Exit when you're done and delete the container:
     docker rm [id]
 
 Remember, the container is generic, all of the data is on your local
-filesystem.
+filesystem.  You don't need a container when you're done and they just
+clutter up your disk.  You'll always make a new container from the image
+whenever you run the server.
 
 ### Running the database server
 
@@ -108,10 +119,13 @@ To run the server:
 
     ./run.sh
 
-This will run a new container based on the image using the local files.
-The database configuration files are in the current directory, so you
-can change them at any time (you'll just have to kill the old instance
-and start a new one):
+Remember that you need to be in the directory with these files when you
+run the command, or else the mounting won't work properly.
+
+`Run.sh` will run a new container based on the image using the local
+files.  The database configuration files are in the current directory,
+so you can change them at any time (you'll just have to kill the old
+instance and start a new one):
 
 - `pg_hba.conf`
 - `pg_ident.conf`
