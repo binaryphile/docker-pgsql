@@ -1,8 +1,8 @@
-# General-purpose Postgresql Docker image
+# General-purpose PostgreSQL Docker image
 
 ## Before you build
 
-You can already use the Postgresql image I've created with these scripts
+You can already use the PostgreSQL image I've created with these scripts
 by running:
 
     docker pull binaryphile/pgsql:9.3.1
@@ -12,7 +12,7 @@ below.
 
 # Intro
 
-These scripts help you create a [Docker] image for a [Postgresql]
+These scripts help you create a [Docker] image for a [PostgreSQL]
 server.
 
 # Usage
@@ -20,11 +20,11 @@ server.
 There are four scripts, two for creating the image and two for running
 it:
 
-- `prep.sh` - downloads and unzips the sources for Postgresql
-- `install.sh` - for use inside the image, installs Postgresql
+- `prep.sh` - downloads and unzips the sources for PostgreSQL
+- `install.sh` - for use inside the image, installs PostgreSQL
 - `init.sh` - for use inside a container based on the image, initializes
 a database
-- `run.sh` - runs an instance of Postgresql and exposes it on port 5432
+- `run.sh` - runs an instance of PostgreSQL and exposes it on port 5432
 by default
 
 The idea behind a general-purpose Docker container is to maximize its
@@ -42,13 +42,13 @@ a file in the database directory as well.
 
 ### Prepping the source
 
-Edit `prep.sh` to specify the Postgresql version you want.  The source
-for your version must be available on the Postgresql ftp server.  You
+Edit `prep.sh` to specify the PostgreSQL version you want.  The source
+for your version must be available on the PostgreSQL ftp server.  You
 can find the url in the file.
 
 Run `./prep.sh`, which will download the sources and untar them.
 
-### Installing Postgresql
+### Installing PostgreSQL
 
 Decide which version of ubuntu you want to install from.  Precise is
 recommended.  If you use quantal, edit `sources.list` to change the
@@ -122,4 +122,4 @@ be available on your network.  You can edit that out of the file easily
 if you want.
 
 [Docker]: http://docker.io/
-[Postgresql]: http://www.postgresql.org/
+[PostgreSQL]: http://www.postgresql.org/
