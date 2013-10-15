@@ -15,6 +15,17 @@ below.
 These scripts help you create a [Docker] image for a [PostgreSQL]
 server.
 
+The idea behind a general-purpose Docker container is to maximize its
+reusability.  To that end, this image contains only the executables and
+their dependencies, and none of the configuration or database files.  It
+can be used to run database instances unmodified, provided you set up
+the database files and run the container with the appropriate arguments.
+The container is meant to load configuration and database files by
+mounting the current directory as a writable volume.  Configuration
+files are in this directory and database files are in the `postgresql`
+subdirectory (made when you make the database).  Logging is done to
+a file in this directory as well.
+
 # Usage
 
 There are four scripts, two for creating the image and two for running
@@ -26,19 +37,6 @@ it:
 initializes a database
 - `run.sh` - runs an instance of PostgreSQL and exposes it on port 5432
 by default
-
-# What "General-purpose" Means
-
-The idea behind a general-purpose Docker container is to maximize its
-reusability.  To that end, this image contains only the executables and
-their dependencies, and none of the configuration or database files.  It
-can be used to run database instances unmodified, provided you set up
-the database files and run the container with the appropriate arguments.
-The container is meant to load configuration and database files by
-mounting the current directory as a writable volume.  Configuration
-files are in this directory and database files are in the `postgresql`
-subdirectory (made when you make the database).  Logging is done to
-a file in this directory as well.
 
 ## Creating the image
 
