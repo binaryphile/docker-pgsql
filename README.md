@@ -135,5 +135,11 @@ The port is mapped to your host at 5432 by default, so be aware it will
 be available on your network.  You can edit that out of the file easily
 if you want.
 
+To stop the server:
+
+    docker stop [id]
+
+You can dispose of the container each time you stop it with `docker rm
+[id]`.
 [Docker]: http://docker.io/
 [PostgreSQL]: http://www.postgresql.org/
