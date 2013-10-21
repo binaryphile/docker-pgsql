@@ -96,8 +96,8 @@ you want to run PostgreSQL in it, you'll need to use the command:
 `daemon.sh` will run PostgreSQL in daemon mode.
 
 Both scripts expose port 5432 on the host.  This is configurable in the
-scripts, but you'll need to also edit `postgresql.conf` with the port
-number.
+scripts and only configures the exposed port, so you don't need to edit
+`postgresql.conf`.
 
 The database configuration files are in the current directory, so you
 can change them whenever you need to:
