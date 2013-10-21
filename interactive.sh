@@ -1,10 +1,8 @@
-: ${IX_NAME?"need to set docker index username IX_NAME, see README.md"}
-: ${REPO_NAME?"need to set repo name REPO_NAME, see README.md"}
+: ${IMAGE?"need to set image name IMAGE, see README.md"}
 : ${SU_NAME?"need to set superuser name SU_NAME, see README.md"}
 : ${SU_PASSWORD?"need to set superuser password SU_PASSWORD, see README.md"}
 
 : ${ROOT=/root}
-: ${IMAGE=$IX_NAME/$REPO_NAME:$PGVERSION}
 : ${PGUSER=postgres}
 : ${PGNAME=postgresql}
 : ${PGDATA=$ROOT/$PGNAME}

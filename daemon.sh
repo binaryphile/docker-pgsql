@@ -1,9 +1,6 @@
-: ${IX_NAME?"need to set docker index username IX_NAME, see README.md"}
-: ${REPO_NAME?"need to set repo name REPO_NAME, see README.md"}
-: ${PGVERSION?TAG=:$PG_VERSION}
+: ${IMAGE?"need to set image name IMAGE, see README.md"}
 
 : ${ROOT=/root}
-: ${IMAGE=$IX_NAME/$REPO_NAME$TAG}
 : ${PGUSER=postgres}
 : ${PGDATA=$ROOT/postgresql}
 : ${PGCONF=$ROOT/postgresql.conf}
