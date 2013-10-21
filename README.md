@@ -29,31 +29,40 @@ initialize the database.
 
 # Usage
 
-There are four scripts, two for creating the image and two for running
-it:
+There are three scripts you need to know about:
 
-- `prep.sh` - downloads and unzips the sources for PostgreSQL
-- `install.sh` - for use inside the image, installs PostgreSQL
-- `init.sh` - for use inside a container run from your image,
-initializes a database
-- `run.sh` - runs an instance of PostgreSQL and exposes it on port 5432
-by default
+- `create-image.sh` - downloads the PostgreSQL source, creates a
+container, installs PostgreSQL and initializes the database
+- `interactive.sh` - runs an interactive session in the container, ready
+to run postgres
+- `daemon.sh` - runs PostgreSQL as a daemon container on host port 5432
 
 ## Creating the image
 
-### Prepping the source
+There are a few environment variables you need to set for the script:
 
-Edit `prep.sh` and `install.sh` to specify the PostgreSQL version you
-want.  The source for your version must be available on the PostgreSQL
-ftp server.  You can find the url in `prep.sh`.
+- **PGVERSION** - includes major.minor.revision.
+  - Set to "9.3.1" for the latest as of this writing
+  - Needs to be a version available at
+  ftp://ftp.postgresql.org/pub/source/ (ignore the "v" in front of the
+  version)
+- **USERNAME** - the name of the superuser account you'd like to create
+in the PostgreSQL database
+- **PASSWORD** - the password for the superuser account
+- **NAME** - your id on the Docker index
+  - if you don't have one, go set one up at http://index.docker.io/
 
-Run `./prep.sh`, which will download the sources and untar them.
+Here's an example of how to set these variables in bash:
 
-### Installing PostgreSQL
+    $ export PGVERSION=9.3.1
+    $ export USERNAME=postgres
+    $ export PASSWORD=P0STGr3s
+    $ export NAME=mynameontheindex
 
-Decide which version of Ubuntu you want to install from.  Precise is
-recommended.  If you use quantal, edit `sources.list` to change the
-distribution name.
+The `create-image.sh` script has defaults for a number of other
+variables, such as the repo name that will be created ("pgsql" by
+default) and the Ubuntu distribution the image will be based on
+("ubuntu:precise" by default).  Edit them as you see fit.
 
 Also, take a second to change `sources.list` to use your favorite local
 Ubuntu mirror rather than ubuntu.wikimedia.org.  Leave the second line
@@ -62,81 +71,53 @@ installed in the container using these scripts, the local `sources.list`
 file will override the one in the container.  It will not be copied into
 the container, however.
 
-Run the command (substituting "quantal" if desired):
+Run the command:
 
-    docker run -v $(pwd):/root -i -t ubuntu:precise /bin/bash
+    $ ./create-image.sh
 
-Once at the command line, run `install.sh`:
+The final product will be an image which is committed locally on your
+machine (but not pushed).  Run `docker images` to see the name. By
+default, it will be your index id followed by the repo name and the
+version as a tag, like "mynameontheindex/pgsql:9.3.1".
 
-    $ cd root
-    $ ./install.sh
-
-Wait.  Once finished, exit the command line.
-
-Create the image from the container by determing the container id from
-`docker ps -a`.  Then `docker commit [id] [yourname]/[repo] [optional
-tag]`.  This will create your image.  You can get rid of the existing
-container afterward with `docker rm [id]`.
-
-You may also want to push to the index at this point.  Remember that
-push doesn't take a tag argument:
+You may want to push to the index at this point.  Remember that push
+doesn't take a tag argument:
 
     docker push [yourname]/[repo]
 
 ## Using the image
 
-### Initializing the database
+If you need to debug, you may need to run interactively.  Just run
+`interactive.sh` to get a command prompt in a new copy of the image.  If
+you want to run PostgreSQL in it, you'll need to use the command:
 
-Edit the `init.sh` USERNAME and PASSWORD variables to create the user
-you want made for your database.
+    /usr/local/pgsql/bin/postgres -c config_file=/root/postgresql.conf
 
-Run a container from the image:
+`daemon.sh` will run PostgreSQL in daemon mode.
 
-    docker run -u postgres -v $(pwd):/root -i -t [yourname]/[repo][:[tag]] /bin/bash
+Both scripts expose port 5432 on the host.  This is configurable in the
+scripts, but you'll need to also edit `postgresql.conf` with the port
+number.
 
-Inside the container run:
-
-    $ cd root
-    $ ./init.sh
-
-Exit when you're done and delete the container:
-
-    docker ps -a
-    docker rm [id]
-
-Remember, the container is generic, all of the data is on your local
-filesystem.  You don't need old containers when they're done and they just
-clutter up your disk.  You'll always make a new container from the image
-whenever you run the server.
-
-### Running the database server
-
-To run the server:
-
-    ./run.sh
-
-Remember that you need to be in the directory with these files when you
-run the command, or else the mounting won't work properly.
-
-`Run.sh` will run a new container based on the image using the local
-files.  The database configuration files are in the current directory,
-so you can change them at any time (you'll just have to `docker stop`
-the old instance and start a new one):
+The database configuration files are in the current directory, so you
+can change them whenever you need to:
 
 - `pg_hba.conf`
 - `pg_ident.conf`
 - `postgresql.conf`
 
-The port is mapped to your host at 5432 by default, so be aware it will
-be available on your network.  You can edit that in the file if you
-want.
+You'll need to restart PostgreSQL by stopping and starting the
+container:
 
-To stop the server:
+    $ docker ps
+    $ docker stop [id]
+    $ ./daemon.sh
 
-    docker stop [id]
-
-You can dispose of the container each time you stop it with `docker rm
-[id]`.
+Each time you run the script, a new container will be created from the
+image.  Each time you stop the container, the old container will still
+occupy your disk and the `docker ps -a` list.  Periodically you can
+dispose of the stale containers with the command `docker rm $(docker ps
+-a -q)`.
 
 [Docker]: http://docker.io/
 [PostgreSQL]: http://www.postgresql.org/
