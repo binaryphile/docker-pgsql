@@ -1,4 +1,4 @@
-# General-purpose PostgreSQL Docker image
+# Reusable PostgreSQL Docker image
 
 ## Before you build
 
