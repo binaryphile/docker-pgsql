@@ -1,3 +1,5 @@
+#!/bin/bash
+
 : ${PG_IMAGE?"need to set image name IMAGE, see README.md"}
 
 : ${ROOT=/root}
