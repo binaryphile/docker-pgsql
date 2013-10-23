@@ -15,4 +15,5 @@ log/
 .zsh_history
 dockyard
 env.sh
+mysql2pgsql.yml
 
