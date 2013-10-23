@@ -1,15 +1,20 @@
-: ${ROOT?"need to set root directory ROOT, see README.md"}
+#!/bin/bash
+
 : ${SU_NAME?"need to set superuser name SU_NAME, see README.md"}
-: ${SU_PASSWORD?"need to set superuser password SU_PASSWORD, see README.md"}
-: ${PGNAME?"need to set postgres directory name PGNAME, see README.md"}
+: ${SU_PASS?"need to set superuser password SU_PASS, see README.md"}
 
-PGCONF=$ROOT/postgresql.conf
-PGBIN=/usr/local/pgsql/bin
-PGCMD=$PGBIN/postgres
-ENCODING="-E UTF-8"
-PGINIT="$PGBIN/initdb $ENCODING"
+: ${ROOT=/root}
+: ${PGCONF=$ROOT/postgresql.conf}
+: ${PGBIN=/usr/local/pgsql/bin}
+: ${PGCMD=$PGBIN/postgres}
+: ${ENCODING="-E UTF-8"}
+: ${PGINIT="$PGBIN/initdb $ENCODING"}
+: ${PGNAME=postgresql}
+: ${PGDIR=$ROOT/$PGNAME}
 
-$PGINIT $ROOT/$PGNAME
-$PGCMD --single -c config_file=$PGCONF <<< "CREATE USER $SU_NAME WITH SUPERUSER PASSWORD '$SU_PASSWORD';"
+if [ ! -d $PGDIR ]; then
+  $PGINIT $PGDIR
+  $PGCMD --single -c config_file=$PGCONF <<< "CREATE USER $SU_NAME WITH SUPERUSER PASSWORD '$SU_PASS';"
+fi
 mkdir -p $ROOT/log
 

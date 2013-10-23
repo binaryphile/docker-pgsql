@@ -1,4 +1,4 @@
-: ${IMAGE?"need to set image name IMAGE, see README.md"}
+: ${PG_IMAGE?"need to set image name PG_IMAGE, see README.md"}
 
 : ${ROOT=/root}
 : ${PGUSER=postgres}
@@ -10,5 +10,5 @@
 : ${SUDO=""} # change to "sudo" if you aren't in docker group
 : ${OPTIONS="-d -w $ROOT -p $PGPORT:5432 -u $PGUSER -v $(pwd):$ROOT -e ROOT=$ROOT -e PGDATA=$PGDATA"}
 
-$SUDO docker run $OPTIONS $IMAGE $PGCMD
+$SUDO docker run $OPTIONS $PG_IMAGE $PGCMD
 

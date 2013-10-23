@@ -1,24 +1,20 @@
 #!/bin/bash
 
-: ${PGVERSION?"Need to set PGVERSION, see README.md"}
+: ${PG_VERSION?"Need to set PG_VERSION, see README.md"}
 : ${SU_NAME?"Need to set database superuser SU_NAME, see README.md"}
-: ${SU_PASSWORD?"Need to set database superuser SU_PASSWORD, see README.md"}
-: ${IX_NAME?"Need to set docker index username IX_NAME, see README.md"}
+: ${SU_PASS?"Need to set database superuser SU_PASS, see README.md"}
 
 : ${ROOT=/root}
 : ${DISTRO=ubuntu:precise}
-: ${REPO_NAME=pgsql}
 : ${PGUSER=postgres}
 : ${PGNAME=postgresql}
-: ${OPTIONS="-d -v $(pwd):$ROOT -w $ROOT -e ROOT=$ROOT -e PGVERSION=$PGVERSION -e PGNAME=$PGNAME -e PGUSER=$PGUSER -e SU_NAME=$SU_NAME -e SU_PASSWORD=$SU_PASSWORD"}
-: ${PGURL=http://ftp.postgresql.org/pub/source/v$PGVERSION/$PGNAME-$PGVERSION.tar.gz}
+: ${OPTIONS="-i -t -v $(pwd):$ROOT -w $ROOT -e ROOT=$ROOT -e PG_VERSION=$PG_VERSION -e PGNAME=$PGNAME -e PGUSER=$PGUSER -e SU_NAME=$SU_NAME -e SU_PASS=$SU_PASS"}
+: ${PGURL=http://ftp.postgresql.org/pub/source/v$PG_VERSION/$PGNAME-$PG_VERSION.tar.gz}
 : ${CMD=$ROOT/install.sh}
 : ${SUDO=""} # change to "sudo" if you aren't in the docker group
 
-if [ ! -d "$PGNAME-$PGVERSION" ]; then
+if [ ! -d "$PGNAME-$PG_VERSION" ]; then
   curl $PGURL | tar -zxvf -
 fi
-ID=$(docker run $OPTIONS $DISTRO $CMD)
-$SUDO docker wait $ID
-$SUDO docker commit $ID $NAME/$REPO_NAME:$PGVERSION
+$SUDO docker run $OPTIONS $DISTRO $CMD
 
