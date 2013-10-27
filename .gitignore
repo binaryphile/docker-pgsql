@@ -18,4 +18,5 @@ env.sh
 mysql2pgsql.yml
 .env
 *.sql
+*.tar.gz
 
