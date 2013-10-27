@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f .env ]; then
+  source .env
+fi
+
 : ${PG_VERSION?"Need to set PG_VERSION, see README.md"}
 : ${SU_USER?"Need to set database superuser SU_USER, see README.md"}
 : ${SU_PASS?"Need to set database superuser SU_PASS, see README.md"}

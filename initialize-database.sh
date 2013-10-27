@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f .env ]; then
+  source .env
+fi
+
 : ${PG_IMAGE?"need to set image name PG_IMAGE, see README.md"}
 : ${SU_USER?"need to set superuser name SU_USER, see README.md"}
 : ${SU_PASS?"need to set superuser password SU_PASS, see README.md"}

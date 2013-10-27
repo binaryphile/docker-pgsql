@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f .env ]; then
+  source .env
+fi
+
 : ${PG_IMAGE?"need to set image name PG_IMAGE, see README.md"}
 
 : ${ROOT=/root}
