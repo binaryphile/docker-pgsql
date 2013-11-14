@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f .env ]; then
+if [ -f ".env" ]; then
   source .env
 fi
 
@@ -9,7 +9,7 @@ fi
 : ${ROOT=/root}
 : ${PGUSER=postgres}
 : ${PGDATA=$ROOT/postgresql}
-: ${PGCONF=$ROOT/postgresql.conf}
+: ${PGCONF=$ROOT/conf/postgresql.conf}
 : ${PGBIN=/usr/local/pgsql/bin}
 : ${PGCMD="$PGBIN/postgres -c config_file=$PGCONF"}
 : ${PGPORT=5432}

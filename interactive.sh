@@ -10,7 +10,7 @@ fi
 : ${PGUSER=postgres}
 : ${PGNAME=postgresql}
 : ${PGDATA=$ROOT/$PGNAME}
-: ${PGCONF=$ROOT/postgresql.conf}
+: ${PGCONF=$ROOT/conf/postgresql.conf}
 : ${PGBIN=/usr/local/pgsql/bin}
 : ${CMD=/bin/bash}
 : ${PGPORT=5432}

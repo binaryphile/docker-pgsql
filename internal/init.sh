@@ -4,7 +4,7 @@
 : ${SU_PASS?"need to set superuser password SU_PASS, see README.md"}
 
 : ${ROOT=/root}
-: ${PGCONF=$ROOT/postgresql.conf}
+: ${PGCONF=$ROOT/conf/postgresql.conf}
 : ${PGBIN=/usr/local/pgsql/bin}
 : ${PGCMD=$PGBIN/postgres}
 : ${ENCODING="-E UTF-8"}
