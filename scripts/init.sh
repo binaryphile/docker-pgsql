@@ -9,10 +9,10 @@
 : ${PGCMD=$PGBIN/postgres}
 : ${ENCODING="-E UTF-8"}
 : ${PGINIT="$PGBIN/initdb $ENCODING"}
-: ${PGDIR=$ROOT/db}
+: ${PGDATA=$ROOT/db}
 
-if [ ! -d $PGDIR ]; then
-  $PGINIT $PGDIR
+if [ ! -d $PGDATA ]; then
+  $PGINIT $PGDATA
   $PGCMD --single -c config_file=$PGCONF <<< "CREATE USER $SU_USER WITH SUPERUSER PASSWORD '$SU_PASS';"
 fi
 mkdir -p $ROOT/log
