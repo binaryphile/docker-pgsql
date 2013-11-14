@@ -1,8 +1,8 @@
-.cache/
-.oh-my-zsh/
-.vim/
-.gitconfig
-postgresql*/
+/.cache/
+/.oh-my-zsh/
+/.vim/
+/.gitconfig
+/db/
 postgresql*.tar.gz
 log/
 .tmux.conf

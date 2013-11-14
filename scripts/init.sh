@@ -9,8 +9,7 @@
 : ${PGCMD=$PGBIN/postgres}
 : ${ENCODING="-E UTF-8"}
 : ${PGINIT="$PGBIN/initdb $ENCODING"}
-: ${PGNAME=postgresql}
-: ${PGDIR=$ROOT/$PGNAME}
+: ${PGDIR=$ROOT/db}
 
 if [ ! -d $PGDIR ]; then
   $PGINIT $PGDIR

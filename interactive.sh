@@ -9,7 +9,7 @@ fi
 : ${ROOT=/root}
 : ${PGUSER=postgres}
 : ${PGNAME=postgresql}
-: ${PGDATA=$ROOT/$PGNAME}
+: ${PGDATA=$ROOT/db}
 : ${PGCONF=$ROOT/conf/postgresql.conf}
 : ${PGBIN=/usr/local/pgsql/bin}
 : ${CMD=/bin/bash}

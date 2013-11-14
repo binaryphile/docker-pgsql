@@ -11,9 +11,9 @@ fi
 : ${ROOT=/root}
 : ${PGUSER=postgres}
 : ${PGNAME=postgresql}
-: ${PGDATA=$ROOT/$PGNAME}
+: ${PGDATA=$ROOT/db}
 : ${PGBIN=/usr/local/pgsql/bin}
-: ${CMD=$ROOT/internal/init.sh}
+: ${CMD=$ROOT/scripts/init.sh}
 : ${SUDO=""} # change to "sudo" if you aren't in docker group
 : ${OPTIONS="-i -t -w $ROOT -p $PGPORT:5432 -u $PGUSER -v $(pwd):$ROOT -e ROOT=$ROOT -e PGDATA=$PGDATA -e PGNAME=$PGNAME -e PGBIN=$PGBIN -e SU_USER=$SU_USER -e SU_PASS=$SU_PASS"}
 

@@ -8,7 +8,7 @@ fi
 
 : ${ROOT=/root}
 : ${PGUSER=postgres}
-: ${PGDATA=$ROOT/postgresql}
+: ${PGDATA=$ROOT/db}
 : ${PGCONF=$ROOT/conf/postgresql.conf}
 : ${PGBIN=/usr/local/pgsql/bin}
 : ${PGCMD="$PGBIN/postgres -c config_file=$PGCONF"}
