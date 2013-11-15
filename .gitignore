@@ -2,7 +2,7 @@
 /.oh-my-zsh/
 /.vim/
 /.gitconfig
-/db/
+/db*/
 postgresql*.tar.gz
 log/
 .tmux.conf
