@@ -31,7 +31,7 @@ SUDO=sudo`
 - Edit `.env` and set:
   - **SU_NAME -** the superuser name you want to create
   - **SU_PASS -** the superuser password you want to create
-- run `./initialize-database.sh`
+- run `./initialize.sh`
 
 ## Running the Database Server
 
@@ -67,7 +67,7 @@ initialize the database.
 
 There are three scripts you need to know about:
 
-- `initialize-database.sh` - initializes the database when you've got an
+- `initialize.sh` - initializes the database when you've got an
 image already but not a working database
 - `postgres.sh` - runs PostgreSQL as a daemon container on host port 5432
 - `interactive.sh` - runs an interactive session in the container, ready
